@@ -3,13 +3,17 @@
 
 from __future__ import absolute_import, print_function, unicode_literals
 import json
-import os.path
+import os
+
+class MiniDB_Error(Exception):
+    pass
 
 class MiniDB:
     '''load a dictionary from a json file as a key-value store'''
-    def __init__(self, dbfile):
+    def __init__(self, dbfile, readonly=False)):
         '''load dbfile as dict, blank if file does not exist yes'''
         self.dbfile = os.path.expanduser(dbfile)
+        self.readonly = readonly
         self.db  = self._load()
 
     def set(self, key, value):
@@ -44,14 +48,21 @@ class MiniDB:
     
     def _load(self):
         '''load db from file'''
+        if not self.readonly and not os.access(self.dbfile, os.W_OK):
+            raise  MiniDB_Error('unable to write to  DB')
         if os.path.exists(self.dbfile):
-            db  = json.load(open(self.dbfile, 'rb'))
+            try:
+                db  = json.load(open(self.dbfile, 'rb'))
+            except ValueError:
+                raise MiniDB_Error('unable to open DB')
         else:
             db = {}
         return db
 
     def dumpdb(self):
         '''write to file'''
+        if self.readonly:
+            raise MiniDB_Error('DB opened in read only mode')
         json.dump(self.db, open(self.dbfile, 'wb'))
 
 
