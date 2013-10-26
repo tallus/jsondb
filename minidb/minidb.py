@@ -3,7 +3,7 @@
 
 from __future__ import absolute_import, print_function, unicode_literals
 import json
-import os
+import os.path
 
 class MiniDB_Error(Exception):
     pass
@@ -48,8 +48,6 @@ class MiniDB:
     
     def _load(self):
         '''load db from file'''
-        if not self.readonly and not os.access(self.dbfile, os.W_OK):
-            raise  MiniDB_Error('unable to write to  DB')
         if os.path.exists(self.dbfile):
             try:
                 db  = json.load(open(self.dbfile, 'rb'))
@@ -57,14 +55,22 @@ class MiniDB:
                 raise MiniDB_Error('unable to open DB')
         else:
             db = {}
+        if not self.readonly:
+            try:
+                json.dump(self.db, open(self.dbfile, 'wb'))
+            except IOError:
+                raise MiniDB_Error('unable to write to  DB')
         return db
 
     def dumpdb(self):
         '''write to file'''
         if self.readonly:
             raise MiniDB_Error('DB opened in read only mode')
-        json.dump(self.db, open(self.dbfile, 'wb'))
-
+        try:
+            json.dump(self.db, open(self.dbfile, 'wb'))
+        except IOError:
+            raise  MiniDB_Error('unable to write to  DB')
+        
 
 if __name__ == "__main__":
     pass
