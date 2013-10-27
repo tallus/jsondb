@@ -1,3 +1,6 @@
 *.pyc
 *.swp
 test.db
+build*
+dist*
+MiniDB.egg-info*
