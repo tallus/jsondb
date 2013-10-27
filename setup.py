@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 setup(
     name = "MiniDB",
     version = "0.1",
-    packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+    packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests", 'tests.py']),
     package_data = {
         # If any package contains *.txt or *.rst files, include them:
         '': ['*.txt', '*.rst'],
