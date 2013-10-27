@@ -4,3 +4,4 @@ test.db
 build*
 dist*
 MiniDB.egg-info*
+*.pybundle
