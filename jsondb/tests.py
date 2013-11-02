@@ -2,12 +2,12 @@
 import unittest
 import os
 #import db_handler
-from minidb import Minidb as minidb
+from jsondb import JsonDB as jsondb
 class MyTests(unittest.TestCase):
         # pylint: disable=R0904
 
     def setUp(self):
-        self.db = minidb("test.db")
+        self.db = jsondb("test.db")
 
     def tearDown(self):
         if os.path.exists("test.db"):
