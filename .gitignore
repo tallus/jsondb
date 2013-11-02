@@ -4,5 +4,5 @@ test.db
 test.py
 build*
 dist*
-JsonDB.egg-info*
+jsonDB.egg-info*
 *.pybundle
