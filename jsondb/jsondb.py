@@ -10,7 +10,7 @@ class JsonDB_Error(Exception):
 
 class JsonDB:
     '''load a dictionary from a json file as a key-value store'''
-    def __init__(self, dbfile, readonly=False)):
+    def __init__(self, dbfile, readonly=False):
         '''load dbfile as dict, blank if file does not exist yes'''
         self.dbfile = os.path.expanduser(dbfile)
         self.readonly = readonly
@@ -57,7 +57,7 @@ class JsonDB:
             db = {}
         if not self.readonly:
             try:
-                json.dump(self.db, open(self.dbfile, 'wb'))
+                json.dump(db, open(self.dbfile, 'wb'))
             except IOError:
                 raise JsonDB_Error('unable to write to  DB')
         return db
