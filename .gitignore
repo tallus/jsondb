@@ -3,5 +3,5 @@
 test.db
 build*
 dist*
-MiniDB.egg-info*
+JsonDB.egg-info*
 *.pybundle
