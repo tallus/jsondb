@@ -3,7 +3,7 @@ ez_setup.use_setuptools()
 
 from setuptools import setup, find_packages
 setup(
-    name = "JsonDB",
+    name = "jsondb",
     version = "0.1",
     packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests", 'tests.py', "*tests*"] ),
     package_data = {
