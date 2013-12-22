@@ -2,7 +2,7 @@
 import unittest
 import os
 #import db_handler
-from jsondb import JsonDB as jsondb
+from jsondb.jsondb import JsonDB as jsondb
 class MyTests(unittest.TestCase):
         # pylint: disable=R0904
 

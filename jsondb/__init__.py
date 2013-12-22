@@ -1,1 +1,1 @@
-from jsondb import *
+__all__ = [ "jsondb" ]
