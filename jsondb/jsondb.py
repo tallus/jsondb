@@ -50,14 +50,16 @@ class JsonDB:
         """load db from file"""
         if os.path.exists(self.dbfile):
             try:
-                db  = json.load(open(self.dbfile, 'rb'))
+                with open(self.dbfile, 'rb') as dbfile:
+                    db  = json.load(dbfile)
             except ValueError:
                 raise JsonDB_Error('unable to open DB')
         else:
             db = {}
         if not self.readonly:
             try:
-                json.dump(db, open(self.dbfile, 'wb'))
+                with open(self.dbfile, 'wb') as dbfile:
+                    json.dump(db, dbfile)
             except IOError:
                 raise JsonDB_Error('unable to write to  DB')
         return db
@@ -67,7 +69,8 @@ class JsonDB:
         if self.readonly:
             raise JsonDB_Error('DB opened in read only mode')
         try:
-            json.dump(self.db, open(self.dbfile, 'wb'))
+            with open(self.dbfile, 'wb') as dbfile:
+                json.dump(db, dbfile)
         except IOError:
             raise  JsonDB_Error('unable to write to  DB')
         
